@@ -28,8 +28,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:wght@700;800;900&display=swap" rel="stylesheet">
 
     <!-- Tailwind CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
+    <script is:inline src="https://cdn.tailwindcss.com"></script>
+    <script is:inline>
       tailwind.config = {
         theme: {
           extend: {
@@ -589,7 +589,7 @@
       </div>
     </footer>
 
-    <script>
+    <script is:inline>
       const menuBtn = document.getElementById('menuBtn');
       const mobileMenu = document.getElementById('mobileMenu');
       const menuIcon = document.getElementById('menuIcon');
