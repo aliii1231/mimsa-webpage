@@ -26,7 +26,7 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:wght@700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <!-- Tailwind CDN -->
     <script is:inline src="https://cdn.tailwindcss.com"></script>
@@ -35,23 +35,43 @@
         theme: {
           extend: {
             fontFamily: {
-              sans: ['Inter', 'system-ui', 'sans-serif'],
-              display: ['Playfair Display', 'Georgia', 'serif'],
+              sans: ['DM Sans', 'system-ui', 'sans-serif'],
+              display: ['Cormorant Garamond', 'Georgia', 'serif'],
             },
             colors: {
               brand: {
-                50: '#ecfdf5',
-                100: '#d1fae5',
-                200: '#a7f3d0',
-                300: '#6ee7b7',
-                400: '#34d399',
-                500: '#10b981',
-                600: '#059669',
-                700: '#047857',
-                800: '#065f46',
-                900: '#064e3b',
-                950: '#022c22',
-              }
+                50: '#EDF3EE',
+                100: '#DCE5DA',
+                200: '#C6D6C8',
+                300: '#A7C1AF',
+                400: '#7FA68F',
+                500: '#56876D',
+                600: '#3B7057',
+                700: '#285840',
+                800: '#123D32',
+                900: '#1B3028',
+                950: '#10231D',
+              },
+              gold: {
+                50: '#F7F2E6',
+                100: '#F0E7D1',
+                200: '#E3D4AE',
+                300: '#C6A96B',
+                400: '#A7894D',
+              },
+              slate: {
+                50: '#F5F0E5',
+                100: '#EEE8DC',
+                200: '#D9D4C7',
+                300: '#C4C4B9',
+                400: '#98A297',
+                500: '#626B62',
+                600: '#4E584F',
+                700: '#39453D',
+                800: '#292D2A',
+                900: '#1B3028',
+                950: '#111C17',
+              },
             },
             animation: {
               'fade-up': 'fadeUp 0.6s ease-out forwards',
@@ -79,12 +99,26 @@
     </script>
 
     <style>
-      .reveal {
+      :root {
+        --color-emerald: #123D32;
+        --color-ivory: #F5F0E5;
+        --color-gold: #C6A96B;
+        --color-forest: #1B3028;
+        --color-sage: #DCE5DA;
+        --color-charcoal: #292D2A;
+      }
+
+      body {
+        background-color: var(--color-ivory);
+        color: var(--color-charcoal);
+      }
+
+      html.reveal-ready .reveal {
         opacity: 0;
         transform: translateY(40px);
         transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
       }
-      .reveal.visible {
+      html.reveal-ready .reveal.visible {
         opacity: 1;
         transform: translateY(0);
       }
@@ -95,16 +129,16 @@
       .reveal-delay-5 { transition-delay: 0.5s; }
 
       .geo-pattern {
-        background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"),
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cg fill='none' stroke='%23C6A96B' stroke-opacity='.16' stroke-width='.7'%3E%3Cpath d='M40 11 46 28 63 17 52 34 69 40 52 46 63 63 46 52 40 69 34 52 17 63 28 46 11 40 28 34 17 17 34 28Z'/%3E%3Cpath d='M0 0 11 11M80 0 69 11M0 80 11 69M80 80 69 69M40 0v11M40 69v11M0 40h11M69 40h11'/%3E%3C/g%3E%3C/svg%3E"),
           linear-gradient(to bottom right, var(--tw-gradient-stops));
       }
 
       .card-glow {
-        transition: all 0.3s ease;
+        transition: transform 0.28s ease, box-shadow 0.28s ease, border-color 0.28s ease;
       }
       .card-glow:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 20px 40px -12px rgba(5, 150, 105, 0.15);
+        transform: translateY(-3px);
+        box-shadow: 0 16px 32px -20px rgba(27, 48, 40, 0.42);
       }
 
       .nav-link {
@@ -116,8 +150,8 @@
         bottom: -4px;
         left: 0;
         width: 0;
-        height: 2px;
-        background: #059669;
+        height: 1px;
+        background: var(--color-gold);
         border-radius: 1px;
         transition: width 0.3s ease;
       }
@@ -133,25 +167,86 @@
       .mobile-menu.open {
         max-height: 400px;
       }
+
+      .hero-copy {
+        isolation: isolate;
+      }
+      .hero-copy::before {
+        content: '';
+        position: absolute;
+        z-index: -1;
+        top: 2rem;
+        bottom: 2rem;
+        left: 50%;
+        width: min(100%, 54rem);
+        transform: translateX(-50%);
+        border: 1px solid rgba(198, 169, 107, 0.22);
+        border-radius: 50% 50% 1.25rem 1.25rem / 18% 18% 1.25rem 1.25rem;
+        background: linear-gradient(180deg, rgba(18, 61, 50, 0.22), rgba(18, 61, 50, 0.04));
+        pointer-events: none;
+      }
+
+      #about .text-center h2::after,
+      #committees .text-center h2::after,
+      #accomplishments .text-center h2::after,
+      #join .text-center h2::after {
+        content: '';
+        display: block;
+        width: 3rem;
+        height: 1px;
+        margin: 0.9rem auto 0;
+        background: var(--color-gold);
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+        }
+
+        html {
+          scroll-behavior: auto !important;
+        }
+
+        html.reveal-ready .reveal {
+          opacity: 1;
+          transform: none;
+        }
+      }
+
+      @media (max-width: 640px) {
+        .hero-copy::before {
+          top: 1.5rem;
+          bottom: 2rem;
+          width: calc(100% - 0.5rem);
+          border-radius: 50% 50% 1rem 1rem / 12% 12% 1rem 1rem;
+        }
+      }
     </style>
   </head>
 
   <body class="bg-slate-50 text-slate-800 antialiased font-sans">
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] rounded-lg bg-white px-4 py-3 font-semibold text-brand-900 shadow-lg">
+      Skip to main content
+    </a>
 
     <!-- Navigation Bar -->
-    <nav class="sticky top-0 z-50 bg-white/80 backdrop-blur-xl border-b border-slate-200/60">
+    <nav class="sticky top-0 z-50 bg-brand-800 border-b border-white/10 shadow-sm">
       <div class="max-w-6xl mx-auto px-4 sm:px-6">
         <div class="h-16 flex items-center justify-between">
           <a href="#" class="flex items-center gap-2.5 group">
             <img src="/mimsa-logo.png" alt="" width="40" height="40" class="w-10 h-10 object-contain" />
-            <span class="font-extrabold text-lg text-slate-900 tracking-tight">MIMSA</span>
+            <span class="font-bold text-lg text-white tracking-tight">MIMSA</span>
           </a>
 
-          <div class="hidden md:flex items-center space-x-8 text-sm font-medium text-slate-600">
-            <a href="#about" class="nav-link hover:text-brand-700 transition">About</a>
-            <a href="#committees" class="nav-link hover:text-brand-700 transition">Committees</a>
-            <a href="#accomplishments" class="nav-link hover:text-brand-700 transition">Accomplishments</a>
-            <a href="#join" class="nav-link hover:text-brand-700 transition">Get Involved</a>
+          <div class="hidden md:flex items-center space-x-8 text-sm font-medium text-white/75">
+            <a href="#about" class="nav-link hover:text-gold-300 transition">About</a>
+            <a href="#committees" class="nav-link hover:text-gold-300 transition">Committees</a>
+            <a href="#accomplishments" class="nav-link hover:text-gold-300 transition">Accomplishments</a>
+            <a href="#join" class="nav-link hover:text-gold-300 transition">Get Involved</a>
           </div>
 
           <div class="flex items-center gap-3">
@@ -159,7 +254,7 @@
               href="https://forms.gle/UwiLjSdqdK9n3N547" 
               target="_blank" 
               rel="noopener noreferrer"
-              class="hidden sm:inline-flex text-xs font-semibold px-4 py-2 rounded-lg text-brand-800 bg-brand-50 hover:bg-brand-100 transition border border-brand-200/80"
+              class="hidden sm:inline-flex text-xs font-semibold px-4 py-2 rounded-lg text-white/90 bg-white/10 hover:bg-white/15 transition border border-white/20"
             >
               Volunteer ↗
             </a>
@@ -167,52 +262,52 @@
               href="https://forms.gle/DWeXymRk2YDCY4PW9" 
               target="_blank" 
               rel="noopener noreferrer"
-              class="bg-brand-700 text-white text-xs sm:text-sm px-4 py-2 rounded-lg font-semibold hover:bg-brand-800 transition shadow-sm hover:shadow-md"
+              class="bg-gold-300 text-brand-950 text-xs sm:text-sm px-4 py-2 rounded-lg font-semibold hover:bg-gold-200 transition shadow-sm"
             >
               Join MIMSA ↗
             </a>
 
-            <button id="menuBtn" class="md:hidden p-2 rounded-lg hover:bg-slate-100 transition" aria-label="Toggle menu">
-              <svg id="menuIcon" class="w-5 h-5 text-slate-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <button id="menuBtn" class="md:hidden p-2 rounded-lg hover:bg-white/10 transition" aria-label="Toggle menu" aria-controls="mobileMenu" aria-expanded="false">
+              <svg id="menuIcon" class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
               </svg>
-              <svg id="closeIcon" class="w-5 h-5 text-slate-700 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg id="closeIcon" class="w-5 h-5 text-white hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
               </svg>
             </button>
           </div>
         </div>
 
-        <div id="mobileMenu" class="mobile-menu md:hidden border-t border-slate-100">
+        <div id="mobileMenu" class="mobile-menu md:hidden border-t border-white/10" aria-hidden="true" inert>
           <div class="py-4 space-y-1">
-            <a href="#about" class="block px-3 py-2.5 text-sm font-medium text-slate-700 hover:bg-brand-50 hover:text-brand-700 rounded-lg transition">About</a>
-            <a href="#committees" class="block px-3 py-2.5 text-sm font-medium text-slate-700 hover:bg-brand-50 hover:text-brand-700 rounded-lg transition">Committees</a>
-            <a href="#accomplishments" class="block px-3 py-2.5 text-sm font-medium text-slate-700 hover:bg-brand-50 hover:text-brand-700 rounded-lg transition">Accomplishments</a>
-            <a href="#join" class="block px-3 py-2.5 text-sm font-medium text-slate-700 hover:bg-brand-50 hover:text-brand-700 rounded-lg transition">Get Involved</a>
+            <a href="#about" class="block px-3 py-2.5 text-sm font-medium text-white/80 hover:bg-white/10 hover:text-white rounded-lg transition">About</a>
+            <a href="#committees" class="block px-3 py-2.5 text-sm font-medium text-white/80 hover:bg-white/10 hover:text-white rounded-lg transition">Committees</a>
+            <a href="#accomplishments" class="block px-3 py-2.5 text-sm font-medium text-white/80 hover:bg-white/10 hover:text-white rounded-lg transition">Accomplishments</a>
+            <a href="#join" class="block px-3 py-2.5 text-sm font-medium text-white/80 hover:bg-white/10 hover:text-white rounded-lg transition">Get Involved</a>
           </div>
         </div>
       </div>
     </nav>
 
     <!-- Hero Section -->
-    <header class="relative overflow-hidden">
+    <header id="main-content" tabindex="-1" class="relative overflow-hidden">
       <img src="/mimsa-hero-background.png" alt="" class="absolute inset-0 h-full w-full object-cover" />
       <div class="absolute inset-0 bg-gradient-to-br from-brand-900/25 via-brand-800/25 to-slate-900/35 geo-pattern"></div>
       <div class="absolute top-20 -left-20 w-72 h-72 bg-brand-400/20 rounded-full blur-3xl animate-float"></div>
       <div class="absolute bottom-10 -right-20 w-96 h-96 bg-brand-300/10 rounded-full blur-3xl animate-float" style="animation-delay: -3s;"></div>
       <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-brand-500/5 rounded-full blur-3xl"></div>
 
-      <div class="relative py-24 sm:py-32 lg:py-40 px-4 max-w-5xl mx-auto text-center">
+      <div class="hero-copy relative py-24 sm:py-32 lg:py-40 px-4 max-w-5xl mx-auto text-center">
         <div class="animate-fade-in">
-          <span class="inline-flex items-center gap-2 text-xs uppercase tracking-widest font-bold text-brand-200 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full border border-white/10">
-            <span class="w-2 h-2 bg-brand-400 rounded-full animate-pulse-slow"></span>
+          <span class="inline-flex items-center gap-2 text-xs uppercase tracking-widest font-semibold text-brand-100 bg-brand-950/25 px-4 py-2 rounded-full border border-gold-300/30">
+            <span class="w-2 h-2 bg-gold-300 rounded-full animate-pulse-slow"></span>
             Mindanao State University – Iligan Institute of Technology
           </span>
         </div>
 
-        <h1 class="text-4xl sm:text-5xl lg:text-7xl font-display font-black text-white mt-8 tracking-tight leading-tight animate-fade-up">
+        <h1 class="text-4xl sm:text-5xl lg:text-7xl font-display font-semibold text-white mt-8 tracking-tight leading-tight animate-fade-up">
           Muslim Students<br>
-          Association <span class="text-brand-300">(MIMSA)</span>
+          Association <span class="text-gold-300">(MIMSA)</span>
         </h1>
 
         <p class="text-brand-100/80 text-lg sm:text-xl mt-6 max-w-2xl mx-auto leading-relaxed animate-fade-up" style="animation-delay: 0.2s;">
@@ -241,15 +336,15 @@
 
         <div class="mt-16 grid grid-cols-3 max-w-md mx-auto gap-4 animate-fade-up" style="animation-delay: 0.6s;">
           <div class="text-center">
-            <div class="text-2xl sm:text-3xl font-black text-white">6</div>
+            <div class="text-2xl sm:text-3xl font-bold text-white">6</div>
             <div class="text-xs text-brand-200/70 mt-1 font-medium">Committees</div>
           </div>
           <div class="text-center border-x border-white/10">
-            <div class="text-2xl sm:text-3xl font-black text-white">3+</div>
+            <div class="text-2xl sm:text-3xl font-bold text-white">3+</div>
             <div class="text-xs text-brand-200/70 mt-1 font-medium">Key Programs</div>
           </div>
           <div class="text-center">
-            <div class="text-2xl sm:text-3xl font-black text-white">1</div>
+            <div class="text-2xl sm:text-3xl font-bold text-white">1</div>
             <div class="text-xs text-brand-200/70 mt-1 font-medium">United Ummah</div>
           </div>
         </div>
@@ -257,7 +352,7 @@
 
       <div class="absolute bottom-0 left-0 right-0">
         <svg viewBox="0 0 1440 80" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full">
-          <path d="M0 40L60 36C120 32 240 24 360 28C480 32 600 48 720 52C840 56 960 48 1080 40C1200 32 1320 24 1380 20L1440 16V80H1380C1320 80 1200 80 1080 80C960 80 840 80 720 80C600 80 480 80 360 80C240 80 120 80 60 80H0V40Z" fill="#f8fafc"/>
+          <path d="M0 40L60 36C120 32 240 24 360 28C480 32 600 48 720 52C840 56 960 48 1080 40C1200 32 1320 24 1380 20L1440 16V80H1380C1320 80 1200 80 1080 80C960 80 840 80 720 80C600 80 480 80 360 80C240 80 120 80 60 80H0V40Z" fill="#F5F0E5"/>
         </svg>
       </div>
     </header>
@@ -267,7 +362,7 @@
       <div class="max-w-6xl mx-auto px-4 sm:px-6">
         <div class="text-center max-w-2xl mx-auto mb-16 reveal">
           <span class="text-xs font-bold uppercase tracking-widest text-brand-600 bg-brand-50 px-3 py-1 rounded-full">Who We Are</span>
-          <h2 class="text-3xl sm:text-4xl font-display font-bold text-slate-900 mt-4">About MIMSA</h2>
+          <h2 class="text-3xl sm:text-4xl font-display font-semibold text-slate-900 mt-4">About MIMSA</h2>
           <p class="text-slate-500 mt-3 text-lg">Guiding values and commitments at MSU-IIT.</p>
         </div>
 
@@ -302,68 +397,68 @@
       <div class="max-w-6xl mx-auto px-4 sm:px-6">
         <div class="text-center max-w-2xl mx-auto mb-16 reveal">
           <span class="text-xs font-bold uppercase tracking-widest text-brand-600 bg-brand-50 px-3 py-1 rounded-full">Our Structure</span>
-          <h2 class="text-3xl sm:text-4xl font-display font-bold text-slate-900 mt-4">Committee Roles</h2>
+          <h2 class="text-3xl sm:text-4xl font-display font-semibold text-slate-900 mt-4">Committee Roles</h2>
           <p class="text-slate-500 mt-3 text-lg">The teams that drive MIMSA's projects throughout the academic year.</p>
         </div>
 
         <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           <div class="reveal reveal-delay-1 card-glow group p-7 bg-slate-50 rounded-2xl border border-slate-200/80 hover:bg-white hover:border-brand-200 transition-all">
-            <div class="w-11 h-11 bg-amber-100 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+            <div class="w-11 h-11 bg-gold-100 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
               <span class="text-xl">📖</span>
             </div>
             <h3 class="text-lg font-bold text-slate-900">Da'wah Committee</h3>
             <p class="text-sm text-slate-500 mt-2 leading-relaxed">
-              Organizes halaqah study circles, Islamic awareness seminars, and coordinates campus prayer room logistics.
+              Strengthens the Islamic spirituality of Muslim students and nurtures their understanding and practice of Islamic teachings, values and virtues.
             </p>
           </div>
 
           <div class="reveal reveal-delay-2 card-glow group p-7 bg-slate-50 rounded-2xl border border-slate-200/80 hover:bg-white hover:border-brand-200 transition-all">
-            <div class="w-11 h-11 bg-rose-100 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+            <div class="w-11 h-11 bg-brand-100 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
               <span class="text-xl">🤝</span>
             </div>
             <h3 class="text-lg font-bold text-slate-900">Humanitarian Outreach Program Committee</h3>
             <p class="text-sm text-slate-500 mt-2 leading-relaxed">
-              Leads campus outreach, Ramadan iftar distributions, disaster relief drives, and volunteer initiatives.
+              Organizes humanitarian initiatives and outreach activities that respond to the needs of Muslim and Indigenous communities.
             </p>
           </div>
 
           <div class="reveal reveal-delay-3 card-glow group p-7 bg-slate-50 rounded-2xl border border-slate-200/80 hover:bg-white hover:border-brand-200 transition-all">
-            <div class="w-11 h-11 bg-blue-100 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+            <div class="w-11 h-11 bg-brand-100 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
               <span class="text-xl">🎓</span>
             </div>
             <h3 class="text-lg font-bold text-slate-900">Salaam/Peace Committee</h3>
             <p class="text-sm text-slate-500 mt-2 leading-relaxed">
-              Facilitates peer tutorials, review sessions, survival guides, and mentoring for incoming freshmen.
+              Promotes peaceful coexistence between Muslims and non-Muslims, fosters mutual understanding and actively supports initiatives advancing peace in Mindanao.
             </p>
           </div>
 
           <div class="reveal reveal-delay-1 card-glow group p-7 bg-slate-50 rounded-2xl border border-slate-200/80 hover:bg-white hover:border-brand-200 transition-all">
-            <div class="w-11 h-11 bg-violet-100 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+            <div class="w-11 h-11 bg-brand-100 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
               <span class="text-xl">📋</span>
             </div>
             <h3 class="text-lg font-bold text-slate-900">Secretariat Committee</h3>
             <p class="text-sm text-slate-500 mt-2 leading-relaxed">
-              Manages official documentation, directory records, meeting minutes, and accreditation requirements.
+              Maintains MIMSA's official documents, records meetings, organizes resolutions and ensures proper documentation of organizational activities and decisions.
             </p>
           </div>
 
           <div class="reveal reveal-delay-2 card-glow group p-7 bg-slate-50 rounded-2xl border border-slate-200/80 hover:bg-white hover:border-brand-200 transition-all">
-            <div class="w-11 h-11 bg-emerald-100 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+            <div class="w-11 h-11 bg-brand-100 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
               <span class="text-xl">💰</span>
             </div>
             <h3 class="text-lg font-bold text-slate-900">IGP Committee</h3>
             <p class="text-sm text-slate-500 mt-2 leading-relaxed">
-              Oversees organization funds, and financial liquidation reports.
+              Manages MIMSA's financial transactions, develops fundraising initiatives and ensures proper accountability of the organization's funds and committee expenses.
             </p>
           </div>
 
           <div class="reveal reveal-delay-3 card-glow group p-7 bg-slate-50 rounded-2xl border border-slate-200/80 hover:bg-white hover:border-brand-200 transition-all">
-            <div class="w-11 h-11 bg-cyan-100 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+            <div class="w-11 h-11 bg-brand-100 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
               <span class="text-xl">📱</span>
             </div>
             <h3 class="text-lg font-bold text-slate-900">TRI-MED Committee</h3>
             <p class="text-sm text-slate-500 mt-2 leading-relaxed">
-              Produces digital publication materials, manages official social media channels, and archives past initiatives.
+              Shares relevant updates on issues affecting Muslim students and the Ummah, advocates positive initiatives and maintains MIMSA's website and social media platforms with timely and meaningful content.
             </p>
           </div>
         </div>
@@ -378,13 +473,13 @@
       <div class="max-w-6xl mx-auto px-4 sm:px-6 relative">
         <div class="text-center max-w-2xl mx-auto mb-16 reveal">
           <span class="text-xs font-bold uppercase tracking-widest text-brand-600 bg-brand-50 px-3 py-1 rounded-full">Impact & Service</span>
-          <h2 class="text-3xl sm:text-4xl font-display font-bold text-slate-900 mt-4">Organization Accomplishments</h2>
+          <h2 class="text-3xl sm:text-4xl font-display font-semibold text-slate-900 mt-4">Organization Accomplishments</h2>
           <p class="text-slate-500 mt-3 text-lg">Milestones and initiatives delivered for the MSU-IIT community.</p>
         </div>
 
         <div class="grid md:grid-cols-3 gap-6 sm:gap-8">
           <div class="reveal reveal-delay-1 card-glow bg-white p-8 rounded-2xl border border-slate-200/80 shadow-sm text-center relative overflow-hidden group">
-            <div class="absolute inset-x-0 bottom-0 h-1 bg-gradient-to-r from-amber-400 to-orange-500 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+            <div class="absolute inset-x-0 bottom-0 h-1 bg-gradient-to-r from-gold-300 to-brand-600 opacity-0 group-hover:opacity-100 transition-opacity"></div>
             <div class="relative h-40 -mx-8 -mt-8 mb-6 overflow-hidden rounded-t-2xl">
               <img src="/university-grand-iftar.png" alt="University Grand Iftar event stage" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
               <div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-900/30 to-transparent"></div>
@@ -399,7 +494,7 @@
           </div>
 
           <div class="reveal reveal-delay-2 card-glow bg-white p-8 rounded-2xl border border-slate-200/80 shadow-sm text-center relative overflow-hidden group">
-            <div class="absolute inset-x-0 bottom-0 h-1 bg-gradient-to-r from-brand-400 to-brand-600 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+            <div class="absolute inset-x-0 bottom-0 h-1 bg-gradient-to-r from-gold-300 to-brand-600 opacity-0 group-hover:opacity-100 transition-opacity"></div>
             <div class="relative h-40 -mx-8 -mt-8 mb-6 overflow-hidden rounded-t-2xl">
               <img src="/musalla-upkeep.png" alt="Prayer hall at the campus musalla" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
               <div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-900/30 to-transparent"></div>
@@ -414,7 +509,7 @@
           </div>
 
           <div class="reveal reveal-delay-3 card-glow bg-white p-8 rounded-2xl border border-slate-200/80 shadow-sm text-center relative overflow-hidden group">
-            <div class="absolute inset-x-0 bottom-0 h-1 bg-gradient-to-r from-blue-400 to-indigo-500 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+            <div class="absolute inset-x-0 bottom-0 h-1 bg-gradient-to-r from-gold-300 to-brand-600 opacity-0 group-hover:opacity-100 transition-opacity"></div>
             <div class="relative h-40 -mx-8 -mt-8 mb-6 overflow-hidden rounded-t-2xl">
               <img src="/general-assembly.png" alt="Students attending MIMSA's 20th General Assembly" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
               <div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-900/30 to-transparent"></div>
@@ -429,7 +524,7 @@
           </div>
 
           <div class="reveal reveal-delay-4 card-glow bg-white p-8 rounded-2xl border border-slate-200/80 shadow-sm text-center relative overflow-hidden group">
-            <div class="absolute inset-x-0 bottom-0 h-1 bg-gradient-to-r from-emerald-400 to-teal-500 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+            <div class="absolute inset-x-0 bottom-0 h-1 bg-gradient-to-r from-gold-300 to-brand-600 opacity-0 group-hover:opacity-100 transition-opacity"></div>
             <div class="relative h-40 -mx-8 -mt-8 mb-6 overflow-hidden rounded-t-2xl">
               <img src="/nutri-ed-outreach.png" alt="Children attending a community education outreach activity" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
               <div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-900/30 to-transparent"></div>
@@ -444,7 +539,7 @@
           </div>
 
           <div class="reveal reveal-delay-5 card-glow bg-white p-8 rounded-2xl border border-slate-200/80 shadow-sm text-center relative overflow-hidden group">
-            <div class="absolute inset-x-0 bottom-0 h-1 bg-gradient-to-r from-amber-400 to-rose-500 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+            <div class="absolute inset-x-0 bottom-0 h-1 bg-gradient-to-r from-gold-300 to-brand-600 opacity-0 group-hover:opacity-100 transition-opacity"></div>
             <div class="relative h-40 -mx-8 -mt-8 mb-6 overflow-hidden rounded-t-2xl">
               <img src="/ahkamul-janaiz.png" alt="Practical demonstration of Islamic funeral rites" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
               <div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-900/30 to-transparent"></div>
@@ -459,7 +554,7 @@
           </div>
 
           <div class="reveal card-glow bg-white p-8 rounded-2xl border border-slate-200/80 shadow-sm text-center relative overflow-hidden group">
-            <div class="absolute inset-x-0 bottom-0 h-1 bg-gradient-to-r from-green-400 to-amber-400 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+            <div class="absolute inset-x-0 bottom-0 h-1 bg-gradient-to-r from-gold-300 to-brand-600 opacity-0 group-hover:opacity-100 transition-opacity"></div>
             <div class="relative h-40 -mx-8 -mt-8 mb-6 overflow-hidden rounded-t-2xl">
               <img src="/alay-sa-graduands.png" alt="Alay sa Graduands celebration for graduating students" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
               <div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-900/30 to-transparent"></div>
@@ -481,7 +576,7 @@
       <div class="max-w-5xl mx-auto px-4 sm:px-6">
         <div class="text-center max-w-2xl mx-auto mb-16 reveal">
           <span class="text-xs font-bold uppercase tracking-widest text-brand-600 bg-brand-50 px-3 py-1 rounded-full">Take Action</span>
-          <h2 class="text-3xl sm:text-4xl font-display font-bold text-slate-900 mt-4">Get Involved with MIMSA</h2>
+          <h2 class="text-3xl sm:text-4xl font-display font-semibold text-slate-900 mt-4">Get Involved with MIMSA</h2>
           <p class="text-slate-500 mt-3 text-lg">Choose how you want to participate in the MSU-IIT Muslim student community.</p>
         </div>
 
@@ -556,7 +651,7 @@
                 href="https://forms.gle/UwiLjSdqdK9n3N547" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                class="group flex items-center justify-center gap-2 w-full text-center py-3.5 px-6 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-semibold transition-all shadow-sm hover:shadow-md"
+                class="group flex items-center justify-center gap-2 w-full text-center py-3.5 px-6 rounded-xl bg-brand-800 hover:bg-brand-900 text-white font-semibold transition-all shadow-sm hover:shadow-md"
               >
                 Open Volunteer Form
                 <svg class="w-4 h-4 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
@@ -574,7 +669,7 @@
           <div class="absolute top-0 left-1/4 w-64 h-64 bg-brand-400/20 rounded-full blur-3xl"></div>
           <div class="absolute bottom-0 right-1/4 w-48 h-48 bg-brand-300/10 rounded-full blur-3xl"></div>
           <div class="relative">
-            <h2 class="text-2xl sm:text-3xl font-display font-bold text-white">Ready to make a difference?</h2>
+            <h2 class="text-2xl sm:text-3xl font-display font-semibold text-white">Ready to make a difference?</h2>
             <p class="text-brand-100/80 mt-3 max-w-lg mx-auto">
               Join hundreds of Muslim students building a stronger campus community at MSU-IIT.
             </p>
@@ -611,10 +706,10 @@
           <div>
             <h4 class="text-white font-semibold text-sm mb-4">Quick Links</h4>
             <ul class="space-y-2 text-sm">
-              <li><a href="#about" class="hover:text-brand-400 transition">About MIMSA</a></li>
-              <li><a href="#committees" class="hover:text-brand-400 transition">Committees</a></li>
-              <li><a href="#accomplishments" class="hover:text-brand-400 transition">Accomplishments</a></li>
-              <li><a href="#join" class="hover:text-brand-400 transition">Get Involved</a></li>
+              <li><a href="#about" class="hover:text-gold-300 transition">About MIMSA</a></li>
+              <li><a href="#committees" class="hover:text-gold-300 transition">Committees</a></li>
+              <li><a href="#accomplishments" class="hover:text-gold-300 transition">Accomplishments</a></li>
+              <li><a href="#join" class="hover:text-gold-300 transition">Get Involved</a></li>
             </ul>
           </div>
 
@@ -622,12 +717,12 @@
             <h4 class="text-white font-semibold text-sm mb-4">Forms</h4>
             <ul class="space-y-2 text-sm">
               <li>
-                <a href="https://forms.gle/DWeXymRk2YDCY4PW9" target="_blank" rel="noopener noreferrer" class="hover:text-brand-400 transition">
+                <a href="https://forms.gle/DWeXymRk2YDCY4PW9" target="_blank" rel="noopener noreferrer" class="hover:text-gold-300 transition">
                   Membership Form ↗
                 </a>
               </li>
               <li>
-                <a href="https://forms.gle/UwiLjSdqdK9n3N547" target="_blank" rel="noopener noreferrer" class="hover:text-brand-400 transition">
+                <a href="https://forms.gle/UwiLjSdqdK9n3N547" target="_blank" rel="noopener noreferrer" class="hover:text-gold-300 transition">
                   Volunteer Form ↗
                 </a>
               </li>
@@ -648,32 +743,48 @@
       const menuIcon = document.getElementById('menuIcon');
       const closeIcon = document.getElementById('closeIcon');
 
+      const setMobileMenuOpen = (isOpen) => {
+        mobileMenu.classList.toggle('open', isOpen);
+        mobileMenu.inert = !isOpen;
+        mobileMenu.setAttribute('aria-hidden', String(!isOpen));
+        menuBtn.setAttribute('aria-expanded', String(isOpen));
+        menuIcon.classList.toggle('hidden', isOpen);
+        closeIcon.classList.toggle('hidden', !isOpen);
+      };
+
       menuBtn.addEventListener('click', () => {
-        mobileMenu.classList.toggle('open');
-        menuIcon.classList.toggle('hidden');
-        closeIcon.classList.toggle('hidden');
+        setMobileMenuOpen(menuBtn.getAttribute('aria-expanded') !== 'true');
       });
 
       mobileMenu.querySelectorAll('a').forEach(link => {
         link.addEventListener('click', () => {
-          mobileMenu.classList.remove('open');
-          menuIcon.classList.remove('hidden');
-          closeIcon.classList.add('hidden');
+          setMobileMenuOpen(false);
         });
       });
 
       const revealElements = document.querySelectorAll('.reveal');
-      const revealObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-          }
+      if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        document.documentElement.classList.add('reveal-ready');
+        const revealObserver = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+              revealObserver.unobserve(entry.target);
+            }
+          });
+        }, {
+          threshold: 0.1,
+          rootMargin: '0px 0px -60px 0px'
         });
-      }, {
-        threshold: 0.1,
-        rootMargin: '0px 0px -60px 0px'
+        revealElements.forEach(el => revealObserver.observe(el));
+      }
+
+      window.addEventListener('keydown', event => {
+        if (event.key === 'Escape' && menuBtn.getAttribute('aria-expanded') === 'true') {
+          setMobileMenuOpen(false);
+          menuBtn.focus();
+        }
       });
-      revealElements.forEach(el => revealObserver.observe(el));
 
       const sections = document.querySelectorAll('section[id]');
       const navLinks = document.querySelectorAll('.nav-link');
@@ -688,11 +799,11 @@
         });
 
         navLinks.forEach(link => {
-          link.classList.remove('text-brand-700', 'font-semibold');
-          link.classList.add('text-slate-600');
+          link.classList.remove('text-gold-300', 'font-semibold');
+          link.classList.add('text-white/75');
           if (link.getAttribute('href') === '#' + current) {
-            link.classList.add('text-brand-700', 'font-semibold');
-            link.classList.remove('text-slate-600');
+            link.classList.add('text-gold-300', 'font-semibold');
+            link.classList.remove('text-white/75');
           }
         });
       });
